@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Sparkles, MapPin, Star, Calendar, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, MapPin, Star, Calendar, ArrowRight, ShieldCheck, Heart, Eye, Sparkle } from 'lucide-react';
 
 interface ParisianHeroProps {
   onBookClick: () => void;
@@ -12,23 +12,57 @@ interface ParisianHeroProps {
 }
 
 export function ParisianHero({ onBookClick, selectedCurrency, onCurrencyChange }: ParisianHeroProps) {
+  const [heroView, setHeroView] = useState<'interior' | 'macro'>('interior');
+
   return (
     <section className="relative overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-luxury">
-      {/* Background Editorial Image & Ambient Gradient */}
-      <div className="relative h-[420px] sm:h-[500px] lg:h-[580px] w-full overflow-hidden">
-        <Image
-          src="/images/hero_salon.jpg"
-          alt="Maison Fleurie Paris Salon Interior"
-          fill
-          priority
-          className="object-cover object-center transform scale-105 transition-transform duration-1000 ease-out hover:scale-100"
-        />
-        {/* Soft diffused editorial overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-        <div className="absolute inset-0 bg-charcoal/20 mix-blend-multiply" />
+      {/* Background Editorial Image & Ambient Gradient with Smooth Crossfade */}
+      <div className="relative h-[440px] sm:h-[520px] lg:h-[600px] w-full overflow-hidden">
+        <AnimatePresence mode="wait">
+          {heroView === 'interior' ? (
+            <motion.div
+              key="interior"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="absolute inset-0"
+            >
+              <Image
+                src="/images/hero_salon.jpg"
+                alt="Maison Fleurie Paris Salon Interior with Haussmann Architecture"
+                fill
+                priority
+                className="object-cover object-center"
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="macro"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="absolute inset-0"
+            >
+              <Image
+                src="/images/hero_macro_serum.jpg"
+                alt="24k Gold Serum Droplet Skincare Ritual on Carrara Marble"
+                fill
+                priority
+                className="object-cover object-center"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Currency & Salon Location Bar */}
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+        {/* Soft diffused editorial overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/65 to-black/20" />
+        <div className="absolute inset-0 bg-charcoal/15 mix-blend-multiply" />
+
+        {/* Top Control Bar: Location, View Perspective & Currency */}
+        <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10 flex-wrap">
+          {/* Location Badge */}
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/90 glass-surface border border-border/60 text-xs font-medium shadow-sm">
             <MapPin className="w-3.5 h-3.5 text-gold" />
             <span className="text-foreground tracking-wide font-label uppercase text-[11px]">
@@ -36,20 +70,48 @@ export function ParisianHero({ onBookClick, selectedCurrency, onCurrencyChange }
             </span>
           </div>
 
-          <div className="flex items-center gap-1 p-1 rounded-full bg-surface/90 glass-surface border border-border/60 shadow-sm">
-            {(['EUR', 'INR', 'USD'] as const).map((curr) => (
+          <div className="flex items-center gap-2">
+            {/* Cinematic Perspective Switcher */}
+            <div className="hidden sm:flex items-center p-1 rounded-full bg-surface/90 glass-surface border border-border/60 shadow-sm text-[11px] font-label uppercase tracking-wider">
               <button
-                key={curr}
-                onClick={() => onCurrencyChange(curr)}
-                className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
-                  selectedCurrency === curr
-                    ? 'bg-primary text-primary-foreground shadow-sm'
+                onClick={() => setHeroView('interior')}
+                className={`flex items-center gap-1 px-3 py-1 rounded-full transition-all ${
+                  heroView === 'interior'
+                    ? 'bg-charcoal text-white shadow-sm font-semibold'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
-                {curr === 'EUR' ? '€ EUR' : curr === 'INR' ? '₹ INR' : '$ USD'}
+                <span>Salon Ambiance</span>
               </button>
-            ))}
+              <button
+                onClick={() => setHeroView('macro')}
+                className={`flex items-center gap-1 px-3 py-1 rounded-full transition-all ${
+                  heroView === 'macro'
+                    ? 'bg-champagne-gold text-charcoal shadow-sm font-bold'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <Sparkle className="w-3 h-3 text-gold" />
+                <span>24k Gold Ritual</span>
+              </button>
+            </div>
+
+            {/* Currency Switcher */}
+            <div className="flex items-center gap-1 p-1 rounded-full bg-surface/90 glass-surface border border-border/60 shadow-sm">
+              {(['EUR', 'INR', 'USD'] as const).map((curr) => (
+                <button
+                  key={curr}
+                  onClick={() => onCurrencyChange(curr)}
+                  className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
+                    selectedCurrency === curr
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {curr === 'EUR' ? '€ EUR' : curr === 'INR' ? '₹ INR' : '$ USD'}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -72,8 +134,8 @@ export function ParisianHero({ onBookClick, selectedCurrency, onCurrencyChange }
               Indulge in <span className="italic font-serif font-light text-gold">Haute Couture</span> Beauty & Wellness
             </h1>
 
-            <p className="text-xs sm:text-sm text-foreground/80 font-sans max-w-lg leading-relaxed">
-              Bespoke skincare rituals, Parisian balayage, and restorative massages delivered with the discretion and elegance of a private salon in Paris.
+            <p className="text-xs sm:text-sm text-foreground/85 font-sans max-w-lg leading-relaxed">
+              Bespoke skincare rituals, 24k gold peptide elixirs, Parisian balayage, and restorative massages delivered with the discretion and elegance of a private salon in Paris.
             </p>
 
             {/* CTA & Trust Badges */}
@@ -118,7 +180,7 @@ export function ParisianHero({ onBookClick, selectedCurrency, onCurrencyChange }
             <ShieldCheck className="w-4 h-4" />
           </div>
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider font-label text-foreground">Clean Botanical Care</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider font-label text-foreground">24k Gold & Botanical Care</h4>
             <p className="text-[11px] text-muted-foreground">Certified organic French formulations</p>
           </div>
         </div>
