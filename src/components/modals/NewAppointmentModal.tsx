@@ -20,8 +20,10 @@ import { Button } from '@/components/ui/Button';
 import { Input, Select, Textarea } from '@/components/ui/Input';
 import { formatINR, cn } from '@/lib/utils';
 import { format, addMinutes } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
 export function NewAppointmentModal() {
+  const router = useRouter();
   const {
     isNewAppointmentOpen,
     setNewAppointmentOpen,
@@ -128,7 +130,7 @@ export function NewAppointmentModal() {
       action: {
         label: 'View in Calendar',
         onClick: () => {
-          if (typeof window !== 'undefined') window.location.href = '/calendar';
+          router.push('/calendar');
         },
       },
     });

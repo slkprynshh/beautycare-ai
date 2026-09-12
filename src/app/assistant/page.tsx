@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
 import { formatINR, cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 import {
   Bot,
   Send,
@@ -35,6 +36,7 @@ interface AssistantMessage {
 }
 
 export default function AssistantPage() {
+  const router = useRouter();
   const { customers, appointments, sendManualNudgeToCustomer } = useStore();
   const { toast } = useToast();
 
@@ -178,9 +180,9 @@ export default function AssistantPage() {
         type: 'success',
       });
     } else if (actionId === 'view_recovery') {
-      if (typeof window !== 'undefined') window.location.href = '/recovery';
+      router.push('/recovery');
     } else if (actionId === 'view_messages') {
-      if (typeof window !== 'undefined') window.location.href = '/messages';
+      router.push('/messages');
     }
   };
 

@@ -26,6 +26,8 @@ import {
   UserPlus,
   Send,
   Scissors,
+  Crown,
+  X,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -40,6 +42,7 @@ import Link from 'next/link';
 
 export default function DashboardPage() {
   const [mounted, setMounted] = React.useState(false);
+  const [showVipBanner, setShowVipBanner] = useState(true);
 
   React.useEffect(() => {
     setMounted(true);
@@ -85,6 +88,13 @@ export default function DashboardPage() {
         subtitle={`Here is what needs attention today at ${salonProfile.name}.`}
         actions={
           <div className="flex items-center gap-3">
+            <Link
+              href="/spa"
+              className="shimmer-effect hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-champagne-gold bg-champagne-gold-hover text-charcoal font-semibold text-xs tracking-wider uppercase shadow-gold-glow transition-all"
+            >
+              <Crown className="w-3.5 h-3.5 text-charcoal" />
+              <span>Parisian VIP Lounge</span>
+            </Link>
             <DateRangePicker
               value={activeDateRange}
               onChange={setActiveDateRange}
@@ -100,6 +110,43 @@ export default function DashboardPage() {
           </div>
         }
       />
+
+      {/* Slim, Elegant, Dismissible Dark Banner for Parisian VIP Lounge */}
+      {showVipBanner && (
+        <div className="mb-6 rounded-2xl bg-charcoal text-white px-4 sm:px-6 py-3 shadow-luxury border border-white/10 flex items-center justify-between gap-4 transition-all animate-fadeIn">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gold-surface border border-gold-border text-gold font-serif font-bold text-xs shrink-0">
+              <Crown className="w-4 h-4 text-gold" />
+            </div>
+            <div className="flex items-center gap-2 flex-wrap min-w-0">
+              <span className="font-serif tracking-wide text-xs sm:text-sm font-medium text-white uppercase truncate">
+                PAVILLON DES VIP PARISIENS
+              </span>
+              <span className="hidden md:inline text-white/40">•</span>
+              <span className="hidden md:inline text-xs text-white/80 truncate">
+                High-fashion client portal, editorial treatment catalog & 3-tap concierge booking
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href="/spa"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-champagne-gold hover:bg-gold-hover text-charcoal font-semibold text-[11px] uppercase tracking-wider transition-all"
+            >
+              <span>View Portal</span>
+              <ArrowRight className="w-3 h-3 text-charcoal" />
+            </Link>
+            <button
+              onClick={() => setShowVipBanner(false)}
+              aria-label="Dismiss VIP Banner"
+              className="p-1.5 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Top KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

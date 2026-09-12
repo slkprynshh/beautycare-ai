@@ -3,51 +3,61 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7f8f7;
-  --foreground: #182329;
-  --surface: #ffffff;
-  --surface-muted: #eef4f1;
-  --surface-elevated: #ffffff;
-  --border: #dce5e1;
-  --border-subtle: #edf3f0;
-  --primary: #27735f;
-  --primary-hover: #1f5e4e;
-  --primary-foreground: #ffffff;
-  --gold: #b67a20;
-  --gold-surface: #fef5e7;
-  --success: #23845b;
-  --success-surface: #eaf6f0;
-  --warning: #b67a20;
-  --warning-surface: #fdf5e7;
-  --destructive: #c24141;
-  --destructive-surface: #faebeb;
-  --info: #3a73a8;
-  --info-surface: #edf4fa;
-  --muted-foreground: #66747b;
+  --background: #FAF9F6;
+  --foreground: #18181B;
+  --surface: #FFFFFF;
+  --surface-muted: #F6F3EC;
+  --surface-elevated: #FFFFFF;
+  --border: #ECE6DC;
+  --border-subtle: #F4EFE6;
+  --primary: #1C1917;
+  --primary-hover: #292524;
+  --primary-foreground: #FAF9F6;
+  --gold: #C5A880;
+  --gold-hover: #B4976F;
+  --gold-surface: #FAF6EE;
+  --gold-border: #E8DCB9;
+  --blush: #F3E3DF;
+  --blush-surface: #FAF2F0;
+  --charcoal: #18181B;
+  --success: #2B7A58;
+  --success-surface: #F0F8F4;
+  --warning: #C5A880;
+  --warning-surface: #FAF6EE;
+  --destructive: #B93838;
+  --destructive-surface: #FDF2F2;
+  --info: #466995;
+  --info-surface: #F0F4FA;
+  --muted-foreground: #71717A;
 }
 
 .dark {
-  --background: #111817;
-  --foreground: #f1f5f3;
-  --surface: #18211f;
-  --surface-muted: #202c29;
-  --surface-elevated: #24312d;
-  --border: #33443e;
-  --border-subtle: #24332e;
-  --primary: #62b89b;
-  --primary-hover: #75c9ad;
-  --primary-foreground: #10201a;
-  --gold: #e4ad55;
-  --gold-surface: #2b200b;
-  --success: #65c393;
-  --success-surface: #10291e;
-  --warning: #e4ad55;
-  --warning-surface: #2d2008;
-  --destructive: #f07878;
-  --destructive-surface: #331515;
-  --info: #79aee0;
-  --info-surface: #122436;
-  --muted-foreground: #a3b2ac;
+  --background: #0E0D0C;
+  --foreground: #F5F3EF;
+  --surface: #171614;
+  --surface-muted: #211F1C;
+  --surface-elevated: #282522;
+  --border: #332F2A;
+  --border-subtle: #24211D;
+  --primary: #FAF9F6;
+  --primary-hover: #E7E3DC;
+  --primary-foreground: #18181B;
+  --gold: #D8BD97;
+  --gold-hover: #E8CFAB;
+  --gold-surface: #272118;
+  --gold-border: #524430;
+  --blush: #3D2D2A;
+  --blush-surface: #261D1C;
+  --charcoal: #F5F3EF;
+  --success: #5DB88C;
+  --success-surface: #12241C;
+  --warning: #D8BD97;
+  --warning-surface: #272118;
+  --destructive: #E57373;
+  --destructive-surface: #2F1717;
+  --info: #79A3DB;
+  --info-surface: #142133;
+  --muted-foreground: #A1A1AA;
 }
 
 @layer base {
@@ -64,14 +74,18 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  h1, h2, h3, .font-editorial {
+    font-family: 'Playfair Display', 'Cormorant Garamond', 'Didot', 'Georgia', serif;
+  }
+
   ::selection {
-    background-color: rgba(15, 118, 110, 0.25);
-    color: var(--primary);
+    background-color: rgba(197, 168, 128, 0.35);
+    color: #18181B;
   }
 
   /* Accessible focus indicators */
   :focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-background;
   }
 }
 
@@ -80,33 +94,48 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Apple-style soft glass effect */
+/* Haute Couture Soft Glassmorphism */
 .glass-surface {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
 .dark .glass-surface {
-  background: rgba(17, 24, 39, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(23, 22, 20, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* Gold Gradient Accents */
+.bg-champagne-gold {
+  background: linear-gradient(135deg, #D4BA92 0%, #C5A880 50%, #B09267 100%);
+}
+
+.bg-champagne-gold-hover:hover {
+  background: linear-gradient(135deg, #DEC59F 0%, #CDB089 50%, #B89A6F 100%);
+}
+
+.text-champagne-gradient {
+  background: linear-gradient(135deg, #C5A880 0%, #8D7350 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Custom discreet scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.25);
+  background: rgba(197, 168, 128, 0.3);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(150, 150, 150, 0.4);
+  background: rgba(197, 168, 128, 0.5);
 }
 
 /* Motion safety */
@@ -124,12 +153,41 @@
 /* Card elevation style */
 .card {
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 20px;
   background: var(--surface);
-  box-shadow: 0 8px 30px rgba(20, 40, 32, 0.05);
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 10px 30px -10px rgba(28, 24, 20, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover {
-  box-shadow: 0 12px 36px rgba(20, 40, 32, 0.08);
+  box-shadow: 0 16px 40px -12px rgba(28, 24, 20, 0.10);
+  border-color: var(--gold-border);
+}
+
+/* Subtle Shimmer for VIP CTA */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 3s infinite;
 }

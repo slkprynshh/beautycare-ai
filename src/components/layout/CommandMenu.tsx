@@ -227,6 +227,7 @@ export function CommandMenu() {
                 Navigation
               </p>
               {[
+                { label: 'Parisian VIP Guest Portal', href: '/spa', icon: Sparkles },
                 { label: 'Overview Dashboard', href: '/dashboard', icon: Calendar },
                 { label: 'Staff Booking Calendar', href: '/calendar', icon: Calendar },
                 { label: 'Customer Directory', href: '/customers', icon: Users },
@@ -242,7 +243,7 @@ export function CommandMenu() {
                     onClick={() => navigate(item.href)}
                     className="w-full flex items-center gap-3 px-3 py-2 rounded-apple text-xs sm:text-sm text-muted-foreground hover:text-foreground hover:bg-surface-muted transition-colors text-left"
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 text-gold" />
                     <span>{item.label}</span>
                   </button>
                 );

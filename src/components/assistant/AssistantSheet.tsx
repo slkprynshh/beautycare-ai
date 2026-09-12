@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/Button';
 import { formatINR, cn } from '@/lib/utils';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface AssistantMessage {
   id: string;
@@ -36,6 +37,7 @@ interface AssistantMessage {
 }
 
 export function AssistantSheet() {
+  const router = useRouter();
   const { isAssistantOpen, setAssistantOpen, customers, appointments, recoveryEvents, sendManualNudgeToCustomer } = useStore();
   const { toast } = useToast();
 
@@ -183,13 +185,13 @@ export function AssistantSheet() {
       });
     } else if (actionId === 'view_recovery') {
       setAssistantOpen(false);
-      if (typeof window !== 'undefined') window.location.href = '/recovery';
+      router.push('/recovery');
     } else if (actionId === 'view_customers') {
       setAssistantOpen(false);
-      if (typeof window !== 'undefined') window.location.href = '/customers';
+      router.push('/customers');
     } else if (actionId === 'view_messages') {
       setAssistantOpen(false);
-      if (typeof window !== 'undefined') window.location.href = '/messages';
+      router.push('/messages');
     }
   };
 
