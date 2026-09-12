@@ -35,7 +35,7 @@ export function BottomNavigation() {
   ];
 
   const moreNav = [
-    { label: 'Parisian VIP Lounge', href: '/spa', icon: Sparkles, desc: 'Haute couture guest experience & booking' },
+    { label: 'Customer Landing Page', href: '/', icon: Sparkles, desc: 'Haute couture guest experience & booking' },
     { label: 'Messages', href: '/messages', icon: MessageSquare, desc: 'WhatsApp reminder & reply inbox' },
     { label: 'Services', href: '/services', icon: Scissors, desc: 'Catalog, pricing & return intervals' },
     { label: 'Team', href: '/team', icon: UserCheck, desc: 'Staff rosters & working hours' },

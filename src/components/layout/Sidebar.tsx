@@ -30,10 +30,10 @@ export function Sidebar() {
 
   const navItems = [
     {
-      label: 'Parisian VIP Lounge',
-      href: '/spa',
+      label: 'Customer Landing Page',
+      href: '/',
       icon: Crown,
-      badge: 'Haute Luxe',
+      badge: 'Public',
       badgeClass: 'bg-gold-surface text-gold border border-gold-border font-label font-bold text-[9px] tracking-wider uppercase px-2 py-0.5',
     },
     { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },

@@ -89,11 +89,11 @@ export default function DashboardPage() {
         actions={
           <div className="flex items-center gap-3">
             <Link
-              href="/spa"
+              href="/"
               className="shimmer-effect hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-champagne-gold bg-champagne-gold-hover text-charcoal font-semibold text-xs tracking-wider uppercase shadow-gold-glow transition-all"
             >
               <Crown className="w-3.5 h-3.5 text-charcoal" />
-              <span>Parisian VIP Lounge</span>
+              <span>Customer Landing Page</span>
             </Link>
             <DateRangePicker
               value={activeDateRange}
@@ -131,10 +131,10 @@ export default function DashboardPage() {
 
           <div className="flex items-center gap-2 shrink-0">
             <Link
-              href="/spa"
+              href="/"
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-champagne-gold hover:bg-gold-hover text-charcoal font-semibold text-[11px] uppercase tracking-wider transition-all"
             >
-              <span>View Portal</span>
+              <span>View Live Website</span>
               <ArrowRight className="w-3 h-3 text-charcoal" />
             </Link>
             <button
