@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   Calendar,
   Users,
-  Sparkles,
   MessageSquare,
   Scissors,
   UserCheck,
@@ -70,20 +69,20 @@ export function Sidebar() {
         {!collapsed ? (
           <div className="flex items-center gap-3 min-w-0">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-surface border border-gold-border text-gold font-serif font-bold text-base shadow-sm shrink-0">
-              MF
+              VB
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
-                <span className="font-serif font-medium text-base text-foreground tracking-tight">Maison Fleurie</span>
+                <span className="font-serif font-medium text-base text-foreground tracking-tight">Villa Belladonna</span>
               </div>
               <p className="text-[10px] text-muted-foreground uppercase font-label tracking-widest truncate">
-                Paris • Haute Beauté SaaS
+                Milan • Luxury Beauty Portal
               </p>
             </div>
           </div>
         ) : (
           <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-surface border border-gold-border text-gold font-serif font-bold text-base shadow-sm">
-            MF
+            VB
           </div>
         )}
 

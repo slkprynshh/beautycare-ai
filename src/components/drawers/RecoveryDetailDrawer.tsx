@@ -4,28 +4,19 @@ import React from 'react';
 import { useStore } from '@/store/useStore';
 import {
   X,
-  TrendingUp,
   Sparkles,
-  Calendar,
-  MessageSquare,
   CheckCircle2,
   HelpCircle,
-  Clock,
-  ArrowRight,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
 import { formatINR, formatIndianDate, formatIndianPhone } from '@/lib/utils';
 
 export function RecoveryDetailDrawer() {
-  const { selectedRecoveryEvent, setSelectedRecoveryEvent, customers, appointments } = useStore();
+  const { selectedRecoveryEvent, setSelectedRecoveryEvent } = useStore();
 
   if (!selectedRecoveryEvent) return null;
-
-  const customer = customers.find((c) => c.id === selectedRecoveryEvent.customerId);
-  const appointment = appointments.find((a) => a.id === selectedRecoveryEvent.appointmentId);
 
   return (
     <AnimatePresence>

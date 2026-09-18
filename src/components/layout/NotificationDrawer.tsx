@@ -11,11 +11,9 @@ import {
   Calendar,
   AlertCircle,
   CreditCard,
-  Check,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn, formatIndianDate } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
 
 export function NotificationDrawer() {
   const router = useRouter();

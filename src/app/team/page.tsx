@@ -3,21 +3,18 @@
 import React, { useState } from 'react';
 import { AppShell } from '@/components/layout/AppShell';
 import { PageHeader } from '@/components/layout/PageHeader';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Input, Select } from '@/components/ui/Input';
+import { Input } from '@/components/ui/Input';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
-import { formatIndianPhone, cn } from '@/lib/utils';
+import { formatIndianPhone } from '@/lib/utils';
 import {
-  UserCheck,
   Plus,
   Clock,
   Calendar,
   Phone,
-  Scissors,
   Edit2,
-  CheckCircle2,
   X,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -25,7 +22,7 @@ import { Staff } from '@/types';
 import Link from 'next/link';
 
 export default function TeamPage() {
-  const { staff, services, addStaff, updateStaff } = useStore();
+  const { staff, addStaff, updateStaff } = useStore();
   const { toast } = useToast();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

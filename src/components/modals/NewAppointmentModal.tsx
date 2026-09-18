@@ -5,12 +5,6 @@ import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
 import {
   X,
-  Calendar,
-  Clock,
-  User,
-  Scissors,
-  UserCheck,
-  CheckCircle2,
   AlertCircle,
   MessageSquare,
   Sparkles,
@@ -57,7 +51,6 @@ export function NewAppointmentModal() {
   const currentCustomer = customers.find((c) => c.id === selectedCustomerId);
 
   // Check collision / double-booking simulation
-  const proposedStart = `${appointmentDate}T${appointmentTime}:00`;
   const isConflict = appointments.some(
     (apt) =>
       apt.staffId === selectedStaffId &&

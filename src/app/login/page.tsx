@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Sparkles, Phone, Mail, ShieldCheck, ArrowRight, CheckCircle2, Globe } from 'lucide-react';
+import { Sparkles, Mail, ShieldCheck, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {

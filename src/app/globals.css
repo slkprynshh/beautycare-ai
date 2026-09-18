@@ -189,5 +189,103 @@
     rgba(255, 255, 255, 0) 100%
   );
   transform: translateX(-100%);
-  animation: shimmer 3s infinite;
+  animation: shimmer 3.5s infinite;
 }
+
+/* Luxury Solid Dark Button with Slow Color-Fill Transition */
+.btn-luxury-dark {
+  background-color: #1A1715;
+  color: #FAF8F5;
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .btn-luxury-dark {
+  background-color: #FAF8F5;
+  color: #1A1715;
+  border: 1px solid rgba(197, 168, 128, 0.4);
+}
+
+.btn-luxury-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #2D2724 0%, #151312 100%);
+  z-index: -1;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.dark .btn-luxury-dark::before {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E8E2D8 100%);
+}
+
+.btn-luxury-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(26, 23, 21, 0.35), 0 0 15px rgba(197, 168, 128, 0.25);
+  border-color: rgba(197, 168, 128, 0.8);
+}
+
+.dark .btn-luxury-dark:hover {
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.6), 0 0 15px rgba(216, 189, 151, 0.35);
+}
+
+/* Delicate Editorial Menu Divider Line */
+.editorial-menu-divider {
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.editorial-menu-divider::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .editorial-menu-divider::after {
+  width: 100%;
+}
+
+/* Slow, subtle image zoom on hover */
+.img-luxury-zoom {
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.group:hover .img-luxury-zoom {
+  transform: scale(1.05);
+}
+
+/* High-Contrast Italicized Serif Accents */
+.italic-accent {
+  font-family: 'Playfair Display', 'Cormorant Garamond', 'Georgia', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Luxury Soundwave Equalizer Animations */
+@keyframes soundwave-1 {
+  0%, 100% { height: 4px; }
+  50% { height: 11px; }
+}
+
+@keyframes soundwave-2 {
+  0%, 100% { height: 7px; }
+  50% { height: 14px; }
+}
+
+@keyframes soundwave-3 {
+  0%, 100% { height: 3px; }
+  50% { height: 10px; }
+}
+

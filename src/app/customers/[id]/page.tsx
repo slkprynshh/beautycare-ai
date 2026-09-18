@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { AppShell } from '@/components/layout/AppShell';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
@@ -13,25 +13,15 @@ import { useToast } from '@/components/ui/Toast';
 import { formatINR, formatIndianDate, formatIndianPhone, formatSimpleDate, cn } from '@/lib/utils';
 import {
   Calendar,
-  Clock,
-  Phone,
-  Mail,
-  Scissors,
   Sparkles,
   MessageSquare,
   Send,
   Plus,
-  ArrowLeft,
-  CheckCircle2,
-  AlertCircle,
   Tag,
-  Edit,
-  FileText,
 } from 'lucide-react';
 
 export default function CustomerDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const customerId = params.id as string;
 
   const {

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Bell, Search, Sparkles, Moon, Sun } from 'lucide-react';
+import { Bell, Search, Moon, Sun } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 
 interface MobileHeaderProps {

@@ -25,7 +25,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export function BottomNavigation() {
   const pathname = usePathname();
   const [showMoreMenu, setShowMoreMenu] = useState(false);
-  const { setNewAppointmentOpen, setAssistantOpen } = useStore();
+  const { setNewAppointmentOpen } = useStore();
 
   const mainNav = [
     { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },

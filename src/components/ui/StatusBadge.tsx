@@ -21,7 +21,7 @@ interface StatusBadgeProps {
   size?: 'sm' | 'md';
 }
 
-export function StatusBadge({ status, type = 'appointment', className, size = 'md' }: StatusBadgeProps) {
+export function StatusBadge({ status, className, size = 'md' }: StatusBadgeProps) {
   let label = status;
   let colorClass = 'bg-surface-muted text-muted-foreground border-border';
   let Icon = Clock;

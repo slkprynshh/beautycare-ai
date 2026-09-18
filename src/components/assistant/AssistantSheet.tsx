@@ -8,19 +8,10 @@ import {
   X,
   Send,
   Sparkles,
-  TrendingUp,
-  Users,
-  AlertCircle,
-  CheckCircle2,
-  Calendar,
-  MessageSquare,
-  ArrowRight,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { formatINR, cn } from '@/lib/utils';
-import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
-import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 
 interface AssistantMessage {
@@ -38,7 +29,7 @@ interface AssistantMessage {
 
 export function AssistantSheet() {
   const router = useRouter();
-  const { isAssistantOpen, setAssistantOpen, customers, appointments, recoveryEvents, sendManualNudgeToCustomer } = useStore();
+  const { isAssistantOpen, setAssistantOpen, customers, sendManualNudgeToCustomer } = useStore();
   const { toast } = useToast();
 
   const [inputQuery, setInputQuery] = useState('');

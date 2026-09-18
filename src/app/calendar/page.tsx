@@ -9,29 +9,22 @@ import { Tabs } from '@/components/ui/Tabs';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
 import { useStore } from '@/store/useStore';
-import { formatINR, formatIndianDate, formatTimeOnly, cn } from '@/lib/utils';
+import { formatINR, formatTimeOnly, cn } from '@/lib/utils';
 import {
   Calendar as CalendarIcon,
   ChevronLeft,
   ChevronRight,
   Plus,
-  Filter,
   Search,
   Clock,
   Sparkles,
-  User,
   Scissors,
-  CheckCircle2,
-  CalendarDays,
-  Check,
-  MessageCircle,
 } from 'lucide-react';
 import { format, addDays, subDays, startOfWeek, isSameDay } from 'date-fns';
 
 export default function CalendarPage() {
   const {
     staff,
-    services,
     appointments,
     setNewAppointmentOpen,
     setSelectedAppointment,

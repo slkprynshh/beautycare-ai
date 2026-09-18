@@ -11,19 +11,14 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
-import { formatINR, formatIndianDate, formatSimpleDate, cn } from '@/lib/utils';
+import { formatINR, formatIndianDate } from '@/lib/utils';
 import {
   TrendingUp,
   Sparkles,
   Users,
   AlertTriangle,
   Download,
-  Calendar,
-  CheckCircle2,
-  Send,
-  HelpCircle,
   ArrowRight,
-  Filter,
 } from 'lucide-react';
 import { mockRecoveryMetrics } from '@/lib/mockData';
 

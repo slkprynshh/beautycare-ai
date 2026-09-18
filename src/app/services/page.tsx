@@ -3,21 +3,17 @@
 import React, { useState } from 'react';
 import { AppShell } from '@/components/layout/AppShell';
 import { PageHeader } from '@/components/layout/PageHeader';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input, Select, Textarea } from '@/components/ui/Input';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
-import { formatINR, cn } from '@/lib/utils';
+import { formatINR } from '@/lib/utils';
 import {
-  Scissors,
   Plus,
   Sparkles,
-  Clock,
-  TrendingUp,
   Edit2,
   CheckCircle2,
-  MessageSquare,
   X,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

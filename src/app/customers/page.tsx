@@ -11,22 +11,14 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
-import { formatINR, formatIndianDate, formatIndianPhone, formatSimpleDate, cn } from '@/lib/utils';
+import { formatINR, formatIndianPhone, formatSimpleDate } from '@/lib/utils';
 import {
   Search,
   Plus,
   UploadCloud,
-  Filter,
-  MessageSquare,
-  Calendar,
-  Sparkles,
   ArrowUpDown,
-  Phone,
-  Clock,
   Send,
-  MoreVertical,
 } from 'lucide-react';
-import { CustomerStatus } from '@/types';
 
 export default function CustomersPage() {
   const router = useRouter();

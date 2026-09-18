@@ -3,23 +3,15 @@
 import React, { useState } from 'react';
 import { AppShell } from '@/components/layout/AppShell';
 import { PageHeader } from '@/components/layout/PageHeader';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
-import { formatINR, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import {
-  Bot,
   Send,
   Sparkles,
-  TrendingUp,
-  Users,
-  AlertTriangle,
-  Calendar,
-  MessageSquare,
-  ArrowRight,
-  HelpCircle,
 } from 'lucide-react';
 
 interface AssistantMessage {
@@ -37,7 +29,7 @@ interface AssistantMessage {
 
 export default function AssistantPage() {
   const router = useRouter();
-  const { customers, appointments, sendManualNudgeToCustomer } = useStore();
+  const { customers, sendManualNudgeToCustomer } = useStore();
   const { toast } = useToast();
 
   const [inputQuery, setInputQuery] = useState('');

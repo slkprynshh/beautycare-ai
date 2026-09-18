@@ -9,7 +9,6 @@ import { Input, Select, Textarea } from '@/components/ui/Input';
 import { Tabs } from '@/components/ui/Tabs';
 import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
-import { formatINR, cn } from '@/lib/utils';
 import {
   Building2,
   MessageSquare,
@@ -19,8 +18,6 @@ import {
   ShieldCheck,
   CheckCircle2,
   Send,
-  AlertCircle,
-  HelpCircle,
 } from 'lucide-react';
 
 export default function SettingsPage() {
@@ -46,7 +43,6 @@ export default function SettingsPage() {
   // Automation Form state
   const [reminderAdvance, setReminderAdvance] = useState(String(salonProfile.reminderAdvanceHours));
   const [noShowDelay, setNoShowDelay] = useState(String(salonProfile.noShowFollowupMinutes));
-  const [maxAttempts, setMaxAttempts] = useState(String(salonProfile.maxFollowupAttempts));
   const [quietStart, setQuietStart] = useState(salonProfile.quietHoursStart);
   const [quietEnd, setQuietEnd] = useState(salonProfile.quietHoursEnd);
 

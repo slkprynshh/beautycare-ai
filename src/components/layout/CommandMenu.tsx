@@ -30,7 +30,6 @@ export function CommandMenu() {
     setNewAppointmentOpen,
     setAssistantOpen,
     customers,
-    appointments,
     services,
   } = useStore();
 

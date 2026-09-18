@@ -15,16 +15,10 @@ import {
   MessageSquare,
   Send,
   Sparkles,
-  CheckCircle2,
-  Clock,
-  AlertCircle,
   Search,
   Bot,
-  UserCheck,
   CheckCheck,
-  ArrowRight,
 } from 'lucide-react';
-import { MessageItem } from '@/types';
 
 export default function MessagesPage() {
   const { messages, sendWhatsAppMessage } = useStore();

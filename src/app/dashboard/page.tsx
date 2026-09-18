@@ -11,7 +11,7 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
 import { DateRangePicker } from '@/components/ui/DateRangePicker';
 import { useStore } from '@/store/useStore';
-import { formatINR, formatIndianDate, formatTimeOnly, cn } from '@/lib/utils';
+import { formatINR, formatTimeOnly, cn } from '@/lib/utils';
 import {
   Calendar as CalendarIcon,
   AlertTriangle,
@@ -22,10 +22,8 @@ import {
   MessageSquare,
   Sparkles,
   CheckCircle2,
-  Clock,
   UserPlus,
   Send,
-  Scissors,
   Crown,
   X,
 } from 'lucide-react';
@@ -51,12 +49,10 @@ export default function DashboardPage() {
   const {
     salonProfile,
     appointments,
-    recoveryEvents,
     activeDateRange,
     setActiveDateRange,
     setNewAppointmentOpen,
     setSelectedAppointment,
-    setSelectedRecoveryEvent,
     setAssistantOpen,
   } = useStore();
 

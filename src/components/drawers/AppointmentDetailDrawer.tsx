@@ -6,16 +6,10 @@ import { useStore } from '@/store/useStore';
 import { useToast } from '@/components/ui/Toast';
 import {
   X,
-  Calendar,
-  Clock,
-  User,
-  Scissors,
   UserCheck,
   CheckCircle2,
   AlertTriangle,
   Send,
-  RefreshCw,
-  Phone,
   MessageSquare,
   Sparkles,
   ExternalLink,
@@ -24,7 +18,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { CustomerAvatar } from '@/components/ui/CustomerAvatar';
-import { formatINR, formatIndianDate, formatIndianPhone, cn } from '@/lib/utils';
+import { formatINR, formatIndianDate, formatIndianPhone } from '@/lib/utils';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 export function AppointmentDetailDrawer() {

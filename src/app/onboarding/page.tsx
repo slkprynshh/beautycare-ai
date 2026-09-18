@@ -15,11 +15,9 @@ import {
   ArrowLeft,
   FileSpreadsheet,
   ShieldCheck,
-  Plus,
   Trash2,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { formatINR } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -108,7 +106,6 @@ export default function OnboardingPage() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-3">
               {steps.map((s) => {
-                const Icon = s.icon;
                 const isCompleted = currentStep > s.num;
                 const isCurrent = currentStep === s.num;
                 return (

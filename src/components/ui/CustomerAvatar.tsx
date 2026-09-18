@@ -43,15 +43,23 @@ export function CustomerAvatar({
 
   return (
     <div className={cn('relative inline-flex shrink-0 select-none items-center justify-center', className)}>
-      <div
-        className={cn(
-          'rounded-full flex items-center justify-center border font-sans tracking-wider shadow-subtle',
-          sizeClasses[size],
-          colorClass
-        )}
-      >
-        {initials}
-      </div>
+      {avatarUrl ? (
+        <img
+          src={avatarUrl}
+          alt={name}
+          className={cn('rounded-full object-cover border shadow-subtle', sizeClasses[size])}
+        />
+      ) : (
+        <div
+          className={cn(
+            'rounded-full flex items-center justify-center border font-sans tracking-wider shadow-subtle',
+            sizeClasses[size],
+            colorClass
+          )}
+        >
+          {initials}
+        </div>
+      )}
       {showIndicator && (
         <span
           className={cn(
