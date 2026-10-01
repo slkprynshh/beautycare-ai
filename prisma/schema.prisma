@@ -1,0 +1,233 @@
+// ============================================================================
+// File: prisma/schema.prisma
+// Architecture: Villa Belladonna Milan / AuraOS - Sovereign Luxury Beauty & Spa
+// ============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ----------------------------------------------------------------------------
+// ENUMS
+// ----------------------------------------------------------------------------
+
+enum Role {
+  CLIENT
+  MASTER_ARTISAN
+  DIRECTOR
+  EXECUTIVE_ASSISTANT
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  IN_SUITE
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum ServiceCategory {
+  HAIR_COUTURE
+  FACIAL_AESTHETICS
+  BODY_RITUALS
+  BRIDAL_VIP
+  NAIL_ARTISTRY
+}
+
+enum ClearanceTier {
+  VIP
+  SOVEREIGN_UHNW
+  ROYAL_DELEGATE
+}
+
+// ----------------------------------------------------------------------------
+// MODELS
+// ----------------------------------------------------------------------------
+
+/// Central User entity with Role-Based Access Control (RBAC)
+model User {
+  id                  String          @id @default(cuid())
+  email               String          @unique
+  name                String?
+  phone               String?
+  role                Role            @default(CLIENT)
+  clearance           ClearanceTier   @default(VIP)
+  pseudonym           String?         @unique // e.g. "AURUM-09"
+  createdAt           DateTime        @default(now()) @map("created_at")
+  updatedAt           DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  clientAppointments  Appointment[]   @relation("ClientAppointments")
+  artisanAppointments Appointment[]   @relation("ArtisanAppointments")
+  orders              Order[]
+  dermalRecords       DermalRecord[]  @relation("ClientDermalRecords")
+  craftedRecords      DermalRecord[]  @relation("ArtisanFormulations")
+  auditActions        SecurityAuditLog[] @relation("ActorAuditLogs")
+
+  @@index([role])
+  @@index([email])
+  @@index([pseudonym])
+  @@map("users")
+}
+
+/// Salon Treatment / Service Catalogue
+model Service {
+  id              String          @id @default(cuid())
+  name            String
+  description     String?         @db.Text
+  durationMinutes Int             @map("duration_minutes")
+  price           Decimal         @db.Decimal(10, 2)
+  category        ServiceCategory
+  isActive        Boolean         @default(true) @map("is_active")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  appointments    Appointment[]
+
+  @@index([category, isActive])
+  @@map("services")
+}
+
+/// High-Precision VIP Reservations & Artisan Timelines
+model Appointment {
+  id              String            @id @default(cuid())
+  userId          String            @map("user_id")
+  serviceId       String            @map("service_id")
+  artisanId       String            @map("artisan_id")
+  startTime       DateTime          @map("start_time")
+  endTime         DateTime          @map("end_time")
+  status          AppointmentStatus @default(CONFIRMED)
+  notes           String?           @db.Text
+  suiteNumber     String?           @default("Suite 1 (Carrara)") @map("suite_number")
+  chauffeurNeeded Boolean           @default(false) @map("chauffeur_needed")
+  flightTailNumber String?          @map("flight_tail_number")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  client          User              @relation("ClientAppointments", fields: [userId], references: [id], onDelete: Cascade)
+  service         Service           @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  artisan         User              @relation("ArtisanAppointments", fields: [artisanId], references: [id], onDelete: Restrict)
+  dermalRecord    DermalRecord?
+
+  @@index([artisanId, startTime, endTime, status])
+  @@index([userId, startTime])
+  @@map("appointments")
+}
+
+/// Master Artisan Dermal History & Botanical Compounding Record
+model DermalRecord {
+  id              String      @id @default(cuid())
+  clientId        String      @map("client_id")
+  artisanId       String      @map("artisan_id")
+  appointmentId   String?     @unique @map("appointment_id")
+  hydrationScore  Int         @default(65) @map("hydration_score")
+  elasticityScore Int         @default(70) @map("elasticity_score")
+  sensitivityNote String?     @db.Text @map("sensitivity_note")
+  formulationRecipe String    @db.Text @map("formulation_recipe") // e.g. "15% 24k Gold Peptide + 3.5% Neroli"
+  batchId         String?     @map("batch_id")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  client          User        @relation("ClientDermalRecords", fields: [clientId], references: [id], onDelete: Cascade)
+  artisan         User        @relation("ArtisanFormulations", fields: [artisanId], references: [id], onDelete: Restrict)
+  appointment     Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+
+  @@index([clientId])
+  @@index([artisanId])
+  @@map("dermal_records")
+}
+
+/// Skincare & Luxury Retail Catalog
+model Product {
+  id            String      @id @default(cuid())
+  name          String
+  sku           String      @unique
+  description   String?     @db.Text
+  price         Decimal     @db.Decimal(10, 2)
+  stockQuantity Int         @default(0) @map("stock_quantity")
+  harvestBatch  String?     @map("harvest_batch") // e.g. "Batch #084 • Autumn 2026"
+  isActive      Boolean     @default(true) @map("is_active")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  orderItems    OrderItem[]
+
+  @@index([sku])
+  @@index([isActive])
+  @@map("products")
+}
+
+/// E-Commerce Orders
+model Order {
+  id                    String      @id @default(cuid())
+  userId                String      @map("user_id")
+  totalAmount           Decimal     @map("total_amount") @db.Decimal(10, 2)
+  stripeSessionId       String?     @unique @map("stripe_session_id")
+  stripePaymentIntentId String?     @unique @map("stripe_payment_intent_id")
+  status                OrderStatus @default(PENDING)
+  createdAt             DateTime    @default(now()) @map("created_at")
+  updatedAt             DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  user                  User        @relation(fields: [userId], references: [id], onDelete: Restrict)
+  items                 OrderItem[]
+
+  @@index([userId, status])
+  @@index([stripeSessionId])
+  @@map("orders")
+}
+
+/// Line items capturing purchase snapshot prices
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String   @map("order_id")
+  productId String   @map("product_id")
+  quantity  Int
+  unitPrice Decimal  @map("unit_price") @db.Decimal(10, 2)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@unique([orderId, productId])
+  @@map("order_items")
+}
+
+/// Tamper-Evident SHA-256 Chained Security Audit Log
+model SecurityAuditLog {
+  id            String   @id @default(cuid())
+  actorId       String   @map("actor_id")
+  targetUserId  String?  @map("target_user_id")
+  action        String   // "VIEW_DERMAL_RECORD", "MODIFY_SCHEDULE", "DISPATCH_EA_PASS"
+  details       String?  @db.Text
+  ipAddress     String?  @map("ip_address")
+  prevHash      String   @map("prev_hash")
+  recordHash    String   @map("record_hash")
+  timestamp     DateTime @default(now()) @map("timestamp")
+
+  // Relations
+  actor         User     @relation("ActorAuditLogs", fields: [actorId], references: [id], onDelete: Cascade)
+
+  @@index([actorId, timestamp])
+  @@map("security_audit_logs")
+}

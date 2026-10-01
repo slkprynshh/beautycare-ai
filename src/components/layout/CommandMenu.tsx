@@ -226,14 +226,21 @@ export function CommandMenu() {
                 Navigation
               </p>
               {[
-                { label: 'Parisian VIP Guest Portal', href: '/spa', icon: Sparkles },
-                { label: 'Overview Dashboard', href: '/dashboard', icon: Calendar },
-                { label: 'Staff Booking Calendar', href: '/calendar', icon: Calendar },
+                { label: 'Villa Belladonna Milan • Guest Palazzo', href: '/', icon: Sparkles },
+                { label: 'Sovereign VIP Client & EA Portal', href: '/portal', icon: Sparkles },
+                { label: 'VIP Bespoke Ceremony Reservation', href: '/portal/book', icon: Sparkles },
+                { label: 'VIP Encrypted Concierge Channel', href: '/portal/concierge', icon: MessageSquare },
+                { label: 'VIP Apple Wallet Digital Suite Pass', href: '/portal/pass/latest', icon: Sparkles },
+                { label: 'Family Office / EA Dispatch Portal', href: '/ea-portal', icon: Sparkles },
+                { label: 'Master Artisan Tablet Console', href: '/staff-calendar', icon: UserCheck },
+                { label: "Director's Sovereign Command Center", href: '/salon-portal', icon: Calendar },
+                { label: 'The Skincare Boutique', href: '/bottega', icon: Scissors },
+                { label: 'Operations Dashboard', href: '/dashboard', icon: Calendar },
                 { label: 'Customer Directory', href: '/customers', icon: Users },
                 { label: 'WhatsApp Message Center', href: '/messages', icon: MessageSquare },
                 { label: 'Service Catalog', href: '/services', icon: Scissors },
                 { label: 'Team & Rosters', href: '/team', icon: UserCheck },
-                { label: 'Settings & WhatsApp API', href: '/settings', icon: Settings },
+                { label: 'Settings & Automation', href: '/settings', icon: Settings },
               ].map((item) => {
                 const Icon = item.icon;
                 return (

@@ -1,18 +1,27 @@
+// ============================================================================
+// File: src/app/layout.tsx
+// Description: Root Layout for Villa Belladonna Milan / VertOps
+// ============================================================================
+
 import type { Metadata } from 'next';
+import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import { ClientProviders } from '@/components/providers/ClientProviders';
 
 export const metadata: Metadata = {
-  title: 'VertOps — Automated Revenue Recovery for Salons & Spas',
-  description: 'Never lose a salon customer because you forgot to follow up. Automated WhatsApp reminders, no-show recovery, and rebooking nudges.',
+  title: 'Villa Belladonna Milan — Luxury Salon & Longevity Clinic',
+  description: 'Milanese luxury beauty, bespoke skincare rituals, and clinical longevity aesthetics.',
 };
+
+const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const isClerkEnabled = Boolean(clerkKey && clerkKey.startsWith('pk_') && !clerkKey.includes('mock'));
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
+  const content = (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,4 +38,15 @@ export default function RootLayout({
       </body>
     </html>
   );
+
+  if (isClerkEnabled) {
+    return (
+      <ClerkProvider publishableKey={clerkKey}>
+        {content}
+      </ClerkProvider>
+    );
+  }
+
+  // Graceful fallback for local development before live keys are configured
+  return content;
 }

@@ -80,6 +80,21 @@ const config: Config = {
           DEFAULT: "var(--info)",
           surface: "var(--info-surface)",
         },
+        carrara: {
+          50: "#FFFFFF",
+          100: "#FAF9F6",
+          200: "#F5F2EB",
+          300: "#EFECE6",
+          DEFAULT: "#FAF9F6",
+        },
+        obsidian: {
+          900: "#141210",
+          950: "#0D0C0A",
+          DEFAULT: "#0A0A0A",
+          surface: "#110F0C",
+          elevated: "#171411",
+          border: "rgba(212, 175, 55, 0.15)",
+        },
         muted: {
           DEFAULT: "var(--surface-muted)",
           foreground: "var(--muted-foreground)",
@@ -95,12 +110,18 @@ const config: Config = {
           "serif",
         ],
         sans: [
+          "Inter",
           "Plus Jakarta Sans",
           "Montserrat",
-          "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
           "sans-serif",
+        ],
+        mono: [
+          "JetBrains Mono",
+          "SF Mono",
+          "Menlo",
+          "monospace",
         ],
         label: [
           "Montserrat",
@@ -115,6 +136,10 @@ const config: Config = {
         "apple-xl": "20px",
         "apple-2xl": "24px",
         "parisian": "28px",
+        "palazzo-sm": "10px",
+        "palazzo": "18px",
+        "palazzo-lg": "28px",
+        "palazzo-pill": "9999px",
       },
       boxShadow: {
         "subtle": "0 1px 2px 0 rgba(0, 0, 0, 0.04)",
@@ -124,6 +149,10 @@ const config: Config = {
         "luxury": "0 14px 40px -10px rgba(26, 20, 15, 0.08)",
         "luxury-hover": "0 22px 50px -12px rgba(26, 20, 15, 0.14)",
         "gold-glow": "0 4px 24px -2px rgba(197, 168, 128, 0.40)",
+        "sovereign-card": "0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(212, 175, 55, 0.15)",
+      },
+      transitionTimingFunction: {
+        "luxury-spring": "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },

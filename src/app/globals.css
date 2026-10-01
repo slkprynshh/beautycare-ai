@@ -67,11 +67,15 @@
   
   html {
     color-scheme: light dark;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-background text-foreground antialiased font-sans;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
   }
 
   h1, h2, h3, .font-editorial {
@@ -150,18 +154,27 @@
   }
 }
 
-/* Card elevation style */
+/* Card elevation style with GPU acceleration */
 .card {
   border: 1px solid var(--border);
   border-radius: 20px;
   background: var(--surface);
   box-shadow: 0 10px 30px -10px rgba(28, 24, 20, 0.05);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .card:hover {
   box-shadow: 0 16px 40px -12px rgba(28, 24, 20, 0.10);
   border-color: var(--gold-border);
+}
+
+/* GPU hardware acceleration utility */
+.gpu-accel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 /* Subtle Shimmer for VIP CTA */

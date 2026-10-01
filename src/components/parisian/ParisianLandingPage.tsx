@@ -101,18 +101,25 @@ export function ParisianLandingPage() {
 
         <div className="hidden sm:flex items-center gap-3">
           <Link
+            href="/portal"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/20 hover:bg-gold/30 text-gold text-xs font-sans transition-colors border border-gold/40"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-gold" />
+            <span className="font-semibold tracking-wide">Sovereign VIP Portal</span>
+          </Link>
+          <Link
             href="/ea-portal"
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 hover:bg-gold/20 text-gold text-xs font-sans transition-colors border border-gold/30"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-sans transition-colors border border-white/10"
           >
             <ShieldCheck className="w-3.5 h-3.5 text-gold" />
             <span className="font-medium tracking-wide">Family Office &amp; EA Protocol</span>
           </Link>
           <Link
-            href="/dashboard"
+            href="/salon-portal"
             className="flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-sans transition-colors border border-white/10"
           >
             <LayoutDashboard className="w-3.5 h-3.5 text-gold" />
-            <span className="font-medium">Director / Salon Portal</span>
+            <span className="font-medium">Director Portal</span>
           </Link>
         </div>
       </div>
@@ -276,6 +283,27 @@ export function ParisianLandingPage() {
                     </div>
                     <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-all" />
                   </button>
+
+                  {/* Sovereign VIP Client & EA Portal */}
+                  <Link
+                    href="/portal"
+                    onClick={() => setIsOffCanvasOpen(false)}
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/40 to-[#1A1612] border border-gold/50 hover:border-gold transition-colors group"
+                  >
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-gold" />
+                        <span className="font-serif text-lg text-gold font-medium group-hover:text-gold-light transition-colors">
+                          Sovereign VIP Portal
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full bg-gold/20 border border-gold/40 text-[9px] font-label font-bold uppercase text-gold">
+                          VIP
+                        </span>
+                      </div>
+                      <p className="text-xs text-zinc-300">Bespoke ceremonies, Apple Wallet passes &amp; concierge</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-all" />
+                  </Link>
 
                   {/* The Belladonna Private Office (UHNW Division) */}
                   <a

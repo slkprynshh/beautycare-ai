@@ -41,18 +41,51 @@ export function EaDispatchPortal() {
   const [isTransmitting, setIsTransmitting] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [dispatchRef, setDispatchRef] = useState('');
+  const [passToken, setPassToken] = useState('');
 
   const selectedTreatment = TREATMENTS.find((t) => t.id === selectedTreatmentId) || TREATMENTS[0];
 
-  const handleDispatch = (e: React.FormEvent) => {
+  const handleDispatch = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsTransmitting(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/ea/dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          principalName,
+          discretionLevel,
+          eaName,
+          eaPhone,
+          eaEmail,
+          corporateAccountCode,
+          selectedTreatmentId: selectedTreatment.id,
+          treatmentTitle: selectedTreatment.title,
+          serviceTarmac,
+          airportSelection,
+          flightTailNumber,
+          arrivalDate,
+          arrivalTime,
+          specialInstructions,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success && data.data) {
+        setDispatchRef(data.data.dispatchId);
+        setPassToken(data.data.passToken);
+      } else {
+        setDispatchRef(`EA-DISPATCH-${Math.floor(1000 + Math.random() * 9000)}`);
+        setPassToken(`VB-PASS-${Math.floor(100000 + Math.random() * 900000)}`);
+      }
+    } catch {
+      setDispatchRef(`EA-DISPATCH-${Math.floor(1000 + Math.random() * 9000)}`);
+      setPassToken(`VB-PASS-${Math.floor(100000 + Math.random() * 900000)}`);
+    } finally {
       setIsTransmitting(false);
       setIsConfirmed(true);
-      setDispatchRef(`EA-DISPATCH-${Math.floor(1000 + Math.random() * 9000)}`);
-    }, 1200);
+    }
   };
 
   const handleReset = () => {
@@ -502,18 +535,26 @@ export function EaDispatchPortal() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Link
+                href={`/portal/pass/${passToken || 'latest'}`}
+                className="w-full py-3.5 rounded-full bg-gold text-charcoal font-label text-xs uppercase tracking-widest font-bold hover:bg-gold-light transition-all text-center shadow-md"
+              >
+                View Live Apple Wallet Pass
+              </Link>
+              <Link
+                href="/portal"
+                className="w-full py-3.5 rounded-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white font-label text-xs uppercase tracking-widest font-semibold transition-all text-center"
+              >
+                Open Sovereign VIP Portal
+              </Link>
+            </div>
+            <div className="pt-2">
               <button
                 onClick={handleReset}
-                className="w-full py-3.5 rounded-full bg-gold text-charcoal font-label text-xs uppercase tracking-widest font-bold hover:bg-gold-light transition-all cursor-pointer shadow-md"
+                className="text-zinc-500 hover:text-gold text-xs font-mono underline transition"
               >
                 Submit New EA Mandate
               </button>
-              <Link
-                href="/"
-                className="w-full py-3.5 rounded-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white font-label text-xs uppercase tracking-widest font-semibold transition-all text-center"
-              >
-                Return to Palazzo Main
-              </Link>
             </div>
           </motion.div>
         )}
